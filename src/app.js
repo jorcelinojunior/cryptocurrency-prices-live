@@ -11,6 +11,7 @@ const route = router.get('/', (req, res, next) => {
         version: "0.0.1"
     });
 });
+
 app.use('/', route);
 
 module.exports = app;
