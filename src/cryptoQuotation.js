@@ -20,7 +20,7 @@ function getQuotationCoinMarketCap() {
             $('.cmc-table__table-wrapper-outer table tbody tr').each(function() {
                 var name = $(this).find('td[class*="circulating-supply"]').text();
                 var aux  = name.split(' ');
-                    name = aux[1];
+                    name = aux[1].toUpperCase();
 
                 var price = $(this).find('td[class*="price"]').text();
                     price = price.replace('$','').split(',').join('');
@@ -33,6 +33,7 @@ function getQuotationCoinMarketCap() {
             });
 
             response(cryptoValues);
+            //console.log(cryptoValues);
         });
     });
 }
