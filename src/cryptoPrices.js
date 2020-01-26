@@ -2,7 +2,7 @@
 
 const request = require('request');
 const cheerio = require('cheerio');
-const timeDefault = 60; // Defina o intervalo em segundos que a aplicação deverá limpar os preços
+const timeDefault = 30; // Defina o intervalo em segundos que a aplicação deverá limpar os preços
 
 var runFirstTime = false;
 var result       = [];
@@ -36,6 +36,7 @@ function getPrices() {
         } else {
             getPriceCoinsOnCoinMarketCap()
                 .then((response, error) => {
+                    result = response;
                     resposta(response);
                 });
         }
