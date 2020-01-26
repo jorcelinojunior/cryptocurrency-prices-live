@@ -28,9 +28,9 @@ function getPrices() {
         countSeconds(0);
     }
 
-    console.log(".......Does the variable contain data? : " + (result.length > 0));
+    console.log(".......Does the variable contain data? : " + (Object.keys(result).length !== 0));
     return new Promise((resposta, error) => {
-        if (result.length > 0) {
+        if (Object.keys(result).length !== 0) {
             console.log(".......Take the price of the variable.");
             resposta(result);
         } else {
