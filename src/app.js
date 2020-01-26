@@ -1,8 +1,8 @@
 'use strict';
 
-const express         = require('express');
-const bodyParser      = require('body-parser');
-const cryptoQuotation = require('./cryptoQuotation')
+const express      = require('express');
+const bodyParser   = require('body-parser');
+const cryptoPrices = require('./cryptoPrices')
 
 const app    = express();
 const router = express.Router();
@@ -23,14 +23,14 @@ const route = router.get('/', (req, res, next) => {
 const cotacao = router.get('/quotation/coinmarketcap/:cryptocurrency?', (req, res, next) => {
     var cryptocurrency = req.params.cryptocurrency;
 
-    cryptoQuotation().then((response, error) => {
+    cryptoPrices().then((response, error) => {
         var allCoins = response;
-        var value      = allCryptos;
+        var value    = allCoins;
 
         if(cryptocurrency){
             cryptocurrency  = cryptocurrency.toUpperCase();
             value = allCoins.find((coin) => coin.name === cryptocurrency);
-            value = value ? value.price : 'Cryptocurrency: "' + coin + '" not found!';
+            value = value ? value.price : 'Cryptocurrency: "' + cryptocurrency + '" not found!';
         }
 
         res.status(200).send(value);
