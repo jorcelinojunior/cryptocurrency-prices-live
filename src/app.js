@@ -20,20 +20,19 @@ const route = router.get('/', (req, res, next) => {
 });
 
 
-const cotacao = router.get('/quotation/coinmarketcap/:cryptocurrency?', (req, res, next) => {
-    var cryptocurrency = req.params.cryptocurrency;
+const cotacao = router.get('/quotation/coinmarketcap/:coinName?', (req, res, next) => {
+    var coinName = req.params.coinName;
 
     cryptoPrices().then((response, error) => {
-        var allCoins = response;
-        var value    = allCoins;
+        var coinValue = response;
 
-        if(cryptocurrency){
-            cryptocurrency  = cryptocurrency.toUpperCase();
-            value = allCoins.find((coin) => coin.name === cryptocurrency);
-            value = value ? value.price : 'Cryptocurrency: "' + cryptocurrency + '" not found!';
-        }
+        if(coinName){
+            coinName  = coinName.toUpperCase();
+            coinValue = response[coinName]
+            coinValue = coinValue ? coinValue : `Cryptocurrency "${coinName}" was not found.`;
+        } 
 
-        res.status(200).send(value);
+        res.status(200).send(coinValue);
     });
 });
 

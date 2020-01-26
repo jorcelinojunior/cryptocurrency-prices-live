@@ -36,8 +36,7 @@ function getPrices() {
         } else {
             getPriceCoinsOnCoinMarketCap()
                 .then((response, error) => {
-                    result = response;
-                    resposta(result);
+                    resposta(response);
                 });
         }
     });
@@ -57,7 +56,7 @@ function getPriceCoinsOnCoinMarketCap() {
             if (err) error("Error: " + err);
 
             var $ = cheerio.load(body);
-            var cryptoValues = [];
+            var cryptoValues = {};
 
             $('.cmc-table__table-wrapper-outer table tbody tr').each(function () {
                 var name = $(this).find('td[class*="circulating-supply"]').text();
@@ -68,10 +67,11 @@ function getPriceCoinsOnCoinMarketCap() {
                 price = price.replace('$', '').split(',').join('');
 
                 var crypto = {};
-                crypto["name"] = name;
-                crypto["price"] = price;
+                // crypto["name"] = name;
+                // crypto["price"] = price;
+                cryptoValues[name] = price;
 
-                cryptoValues.push(crypto);
+                //cryptoValues.push(crypto);
             });
             response(cryptoValues);
         });
