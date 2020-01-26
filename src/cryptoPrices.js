@@ -2,10 +2,10 @@
 
 const request = require('request');
 const cheerio = require('cheerio');
-const timeDefault = 60000;
+const timeDefault = 60; // Defina o intervalo em segundos que a aplicação deverá limpar os preços
 
 var runFirstTime = false;
-var result = [];
+var result       = [];
 
 function cleanPricesList() {
     setTimeout(() => {
