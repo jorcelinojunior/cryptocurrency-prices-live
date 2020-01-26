@@ -1,5 +1,5 @@
-# NodeJS_Server_API
- 
+# Cryptocurrency Prices Live
+
 This is an API designed to price more than 100 different types of cryptocurrencies.
 You can consume the data by making a GET access at the endpoints:
 
