@@ -14,7 +14,8 @@ app.use(bodyParser.urlencoded({
 
 const route = router.get('/', (req, res, next) => {
     res.status(200).send({
-        title: "Node Store API",
+        title: "Cryptocurrency Prices Live",
+		project: "https://github.com/jorcelinojunior/cryptocurrency-prices-live",
         version: "0.0.1"
     });
 });
