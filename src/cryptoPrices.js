@@ -60,12 +60,18 @@ function getPriceCoinsOnCoinMarketCap() {
             var cryptoValues = {};
 
             $('.cmc-table__table-wrapper-outer table tbody tr').each(function () {
-                var name = $(this).find('td[class*="circulating-supply"]').text();
-                var aux = name.split(' ');
-                name = aux[1].toUpperCase();
+                //var name   = $(this).find('td[class*="circulating-supply"] div').text();
+                var name   = $($($(this).find('td'))[5]).text();
+                if(name == null || name == ""){
+                    return;
+                }
+                //console.log("name: " + name);
+                var aux    = name.split(' ');
+                name       = aux[1].toUpperCase();
+                //console.log("name_final: " + name + "\n");
 
-                var price = $(this).find('td[class*="price"]').text();
-                price = price.replace('$', '').split(',').join('');
+                var price  = $(this).find('td[class*="price"]').text();
+                price      = price.replace('$', '').split(',').join('');
 
                 var crypto = {};
                 // crypto["name"] = name;

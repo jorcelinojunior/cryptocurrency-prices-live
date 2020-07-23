@@ -1,11 +1,11 @@
 'use strict';
 
-const express = require('express');
-const bodyParser = require('body-parser');
+const express      = require('express');
+const bodyParser   = require('body-parser');
 const cryptoPrices = require('./cryptoPrices')
 
-const app = express();
-const router = express.Router();
+const app          = express();
+const router       = express.Router();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -28,7 +28,7 @@ const cotacao = router.get('/quotation/coinmarketcap/:coinName?', (req, res, nex
         var coinValue = response;
 
         if (coinName) {
-            coinName = coinName.toUpperCase();
+            coinName  = coinName.toUpperCase();
             coinValue = response[coinName]
             coinValue = coinValue ? coinValue : `Cryptocurrency "${coinName}" was not found.`;
         }
