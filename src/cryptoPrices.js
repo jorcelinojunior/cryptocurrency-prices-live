@@ -17,7 +17,7 @@ function cleanPricesList() {
 
 function countSeconds(seconds) {
     setTimeout(() => {
-        console.log(seconds + " seconds");
+        //console.log(seconds + " seconds");
         countSeconds(++seconds);
     }, 1000);
 }
@@ -58,19 +58,26 @@ function getPriceCoinsOnCoinMarketCap() {
 
             var $ = cheerio.load(body);
             var cryptoValues = {};
+            
 
-            $('.cmc-table__table-wrapper-outer table tbody tr').each(function () {
+            //console.log(cheerio.load(body))
+
+            $('tr.cmc-table-row').each(function () {
                 //var name   = $(this).find('td[class*="circulating-supply"] div').text();
-                var name   = $($($(this).find('td'))[5]).text();
-                if(name == null || name == ""){
-                    return;
-                }
-                //console.log("name: " + name);
-                var aux    = name.split(' ');
-                name       = aux[1].toUpperCase();
-                //console.log("name_final: " + name + "\n");
+                // var name   = $($($(this).find('td'))[5]).text();
+                var tdName   = $(this).find('td[class*="rc-table-cell"] div.gxonsA p[color="text2"]').text();
 
-                var price  = $(this).find('td[class*="price"]').text();
+                if(tdName == null || tdName == "") return 
+
+                let [volume, name] = tdName.split(' ');
+                name = name.toUpperCase().trim();
+                
+                //console.log("name: " + name);
+
+                var price  = $($(this).find('td')[4]).find('a').text();
+
+                //console.log('price: ', price)
+
                 price      = price.replace('$', '').split(',').join('');
 
                 var crypto = {};

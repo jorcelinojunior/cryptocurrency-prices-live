@@ -32,7 +32,7 @@ const cotacao = router.get('/quotation/coinmarketcap/:coinName?', (req, res, nex
             coinValue = response[coinName]
             coinValue = coinValue ? coinValue : `Cryptocurrency "${coinName}" was not found.`;
         }
-
+        
         res.status(200).send(coinValue);
     });
 });
