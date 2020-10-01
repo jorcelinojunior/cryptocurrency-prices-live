@@ -74,11 +74,11 @@ function getPriceCoinsOnCoinMarketCap() {
                 
                 //console.log("name: " + name);
 
-                var price  = $($(this).find('td')[4]).find('a').text();
-
-                //console.log('price: ', price)
+                var price  = $($(this).find('td')[3]).find('a').text();
+                console.log('price: ', price)
 
                 price      = price.replace('$', '').split(',').join('');
+
 
                 var crypto = {};
                 // crypto["name"] = name;
