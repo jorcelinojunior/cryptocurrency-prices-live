@@ -59,33 +59,17 @@ function getPriceCoinsOnCoinMarketCap() {
             var $ = cheerio.load(body);
             var cryptoValues = {};
             
-
-            //console.log(cheerio.load(body))
-
-            $('tr.cmc-table-row').each(function () {
-                //var name   = $(this).find('td[class*="circulating-supply"] div').text();
-                // var name   = $($($(this).find('td'))[5]).text();
-                var tdName   = $(this).find('td[class*="rc-table-cell"] div.gxonsA p[color="text2"]').text();
-
-                if(tdName == null || tdName == "") return 
-
-                let [volume, name] = tdName.split(' ');
-                name = name.toUpperCase().trim();
+            $('.cmc-table tbody tr').each(function (elem) {
+                var name   = $(this).find('a.cmc-link div div div p').text();
                 
-                //console.log("name: " + name);
+                if(name == null || name == "" || name == undefined) return ;
 
-                var price  = $($(this).find('td')[3]).find('a').text();
-                console.log('price: ', price)
+                name = name.toUpperCase().trim();
 
-                price      = price.replace('$', '').split(',').join('');
+                var price = $($(this).find('td')[3]).find('a').text();
+                    price = price.replace('$', '').split(',').join('');
 
-
-                var crypto = {};
-                // crypto["name"] = name;
-                // crypto["price"] = price;
                 cryptoValues[name] = price;
-
-                //cryptoValues.push(crypto);
             });
             response(cryptoValues);
         });
